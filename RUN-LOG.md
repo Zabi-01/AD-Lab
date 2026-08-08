@@ -10,7 +10,7 @@ placeholders from [`LAB-TOPOLOGY.md`](LAB-TOPOLOGY.md).
 | Role | Hostname | IP |
 |---|---|---|
 | Domain Controller | `OBS-DC01` | `<DC_IP>` |
-| Workstation (gateway-facing box) | `ROOTWIN` | `<WS1_IP>` |
+| Workstation (Normal Machine) | `ROOTWIN-X` | `<WS1_IP>` |
 | Workstation (secondary target) | `ROOTWIN-Y` | `<WS2_IP>` |
 | Attacker (Kali) | — | `<ATTACKER_IP>` |
 
