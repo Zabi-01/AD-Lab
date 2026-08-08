@@ -20,10 +20,10 @@ Domain: **`obs.corp`**
 
 | Account | Type | Password / Secret | Notes |
 |---|---|---|---|
-| `Zabi` | Domain user | `[REDACTED]` | Initial foothold — captured via LLMNR poisoning |
+| `Zabi` | Domain user  local acct on `ROOTWIN-Y`| `[REDACTED]` | Initial foothold — captured via LLMNR poisoning |
 | `Tony Stark` | Domain Admin | `[REDACTED]` | High-value target |
 | `SQLService` | Domain service account (SPN-registered) | `[REDACTED]` | Kerberoasted; SPN `OBS-DC01/SQLService.obs.corp:<PORT>` |
-| `mharoon` | Domain user + local acct on `ROOTWIN-Y` | `[REDACTED — NetNTLMv2 + local NT hash]` | Captured via Responder; local hash recovered from SAM dump |
+| `mharoon` | Domain user + local acct on `ROOTWIN-X` | `[REDACTED — NetNTLMv2 + local NT hash]` | Captured via Responder; local hash recovered from SAM dump |
 | `Masab` | Local account on `ROOTWIN-Y` | `[REDACTED — local NT hash]` | From SAM dump |
 | `Administrator` (local, `ROOTWIN-Y`) | Local built-in | `[REDACTED]` | Observed in SAM dump |
 
