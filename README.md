@@ -25,6 +25,10 @@ attack paths rather than a loose collection of commands.
 
 ## Lab Environment
 
+Built entirely on **VMware Workstation**, running four VMs on a private,
+host-only virtual network with no bridged/NAT route to the internet or any
+production network.
+
 | Role | OS | Notes |
 |---|---|---|
 | Domain Controller | Windows Server 2025 | AD DS, DNS, holds `krbtgt` |
@@ -32,10 +36,11 @@ attack paths rather than a loose collection of commands.
 | Domain-joined workstation #2 | Windows 11 Enterprise | Secondary target, used to demonstrate lateral movement and pivot scope |
 | Attacker host | Kali Linux | Runs Responder, the Impacket suite, mitm6, Hashcat, and Metasploit/Mimikatz payloads |
 
-All four hosts sit on a single isolated virtual segment with no route to
-any network outside the hypervisor. This is a deliberate design choice —
+All four VMs sit on a single isolated VMware virtual network (host-only /
+custom vSwitch, no external routing). This is a deliberate design choice —
 several stages (LLMNR poisoning, mitm6) rely on shared broadcast/multicast
-scope with the victims and are contained entirely within the lab.
+scope with the victims, and keeping the segment fully isolated means those
+techniques can be run freely without affecting anything outside the lab.
 
 - Full topology, IP scheme, and account list (redacted): [`LAB-TOPOLOGY.md`](LAB-TOPOLOGY.md)
 - Real domain, hostnames, and usernames, with attack order and outcomes (secrets masked): [`RUN-LOG.md`](RUN-LOG.md)
