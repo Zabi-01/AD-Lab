@@ -1,8 +1,0 @@
-# Never commit real lab artifacts
-*.hash
-*.DMP
-*.dmp
-credentials.json
-loot/
-targets.txt
-*.pcap
