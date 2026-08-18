@@ -1,11 +1,15 @@
 # Active Directory Attack Lab
 
+![Impacket](https://img.shields.io/badge/Impacket-Suite-black) ![Responder](https://img.shields.io/badge/Responder-LLMNR%2FNBT--NS-red) ![mitm6](https://img.shields.io/badge/mitm6-IPv6%20MITM-orange) ![Mimikatz](https://img.shields.io/badge/Mimikatz-Credential%20Dump-blue) ![Hashcat](https://img.shields.io/badge/Hashcat-Cracking-yellow) ![MITRE ATT&CK](https://img.shields.io/badge/MITRE%20ATT%26CK-Mapped-D33A2C)
+
 A structured, end-to-end writeup of common Active Directory attack
 techniques, demonstrated in a self-hosted, isolated lab environment —
 from unauthenticated network position through to full domain
 compromise and persistence.
 
 **Environment:** Isolated, self-owned virtual lab (no production systems involved)
+
+**Companion repo:** [Enterprise-SOC-Lab](https://github.com/Zabi-01/Enterprise-SOC-Lab) — what a Wazuh SIEM actually caught (and missed) running this same attack chain.
 
 > All IPs and passwords in this repository are placeholders/redacted.
 > See [`LAB-TOPOLOGY.md`](LAB-TOPOLOGY.md) for the placeholder legend, and
@@ -25,9 +29,9 @@ attack paths rather than a loose collection of commands.
 
 ## Lab Environment
 
-Built entirely on **VMware Workstation**, running four VMs on a private,
-host-only virtual network with no bridged/NAT route to the internet or any
-production network.
+Built entirely on **VMware Workstation**, running four VMs on VMware's
+NAT network (**VMnet8**), isolated from the host's LAN/internet-facing
+adapter.
 
 | Role | OS | Notes |
 |---|---|---|
@@ -36,11 +40,12 @@ production network.
 | Domain-joined workstation #2 | Windows 11 Enterprise | Secondary target, used to demonstrate lateral movement and pivot scope |
 | Attacker host | Kali Linux | Runs Responder, the Impacket suite, mitm6, Hashcat, and Metasploit/Mimikatz payloads |
 
-All four VMs sit on a single isolated VMware virtual network (host-only /
-custom vSwitch, no external routing). This is a deliberate design choice —
-several stages (LLMNR poisoning, mitm6) rely on shared broadcast/multicast
-scope with the victims, and keeping the segment fully isolated means those
-techniques can be run freely without affecting anything outside the lab.
+All four VMs sit on a single isolated VMware NAT network (**VMnet8**), with
+no bridged route to a production network. This is a deliberate design
+choice — several stages (LLMNR poisoning, mitm6) rely on shared
+broadcast/multicast scope with the victims, and keeping the segment
+isolated means those techniques can be run freely without affecting
+anything outside the lab.
 
 - Full topology, IP scheme, and account list (redacted): [`LAB-TOPOLOGY.md`](LAB-TOPOLOGY.md)
 - Real domain, hostnames, and usernames, with attack order and outcomes (secrets masked): [`RUN-LOG.md`](RUN-LOG.md)
@@ -138,3 +143,6 @@ Every technique documented here was performed exclusively against an
 isolated lab domain owned and controlled by the author, for training
 purposes. None of this material should be applied to any system without
 explicit, written authorization to test.
+----
+
+**Companion repo:** [Enterprise-SOC-Lab](https://github.com/Zabi-01/Enterprise-SOC-Lab) — what a Wazuh SIEM actually caught (and missed) running this same attack chain.
